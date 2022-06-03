@@ -1,6 +1,6 @@
 package com.grupo3.consumer.util;
 
-public enum StatusPedido {
+public enum StatusOrder {
     EM_ANDAMENTO,
     CONCLUIDO
 }

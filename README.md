@@ -1,1 +1,1 @@
-# first-sqs-consomer-app
+# Consumer Kafka g3

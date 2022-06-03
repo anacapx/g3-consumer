@@ -11,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.grupo3.consumer.util.StatusPedido;
+import com.grupo3.consumer.util.StatusOrder;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -46,5 +46,5 @@ public class Order {
 
     @Column(name = "order_status")
     @Enumerated(EnumType.STRING)
-    private StatusPedido status;
+    private StatusOrder status;
 }

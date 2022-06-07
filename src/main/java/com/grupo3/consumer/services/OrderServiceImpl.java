@@ -28,7 +28,7 @@ public class OrderServiceImpl implements IOrderService {
 	}
 
 	@Override
-	public Order updateStatusOrder(Integer orderId) {
+	public Order updateStatusOrderSuccess(Integer orderId) {
 		Order order = dao.findById(orderId).orElse(null);
 
 		if (!this.orderExists(orderId) || !this.orderInProgress(orderId)) {
@@ -36,6 +36,19 @@ public class OrderServiceImpl implements IOrderService {
 		}
 
 		order.setStatus(StatusOrder.CONCLUIDO);
+
+		return dao.save(order);
+	}
+
+	@Override
+	public Order updateStatusOrderCancel(Integer orderId) {
+		Order order = dao.findById(orderId).orElse(null);
+
+		if (!this.orderExists(orderId) || !this.orderInProgress(orderId)) {
+			throw new RuntimeException("Pedido indisponivel.");
+		}
+
+		order.setStatus(StatusOrder.CANCELADO);
 
 		return dao.save(order);
 	}

@@ -7,5 +7,7 @@ public interface IOrderService {
 
     public boolean orderInProgress(Integer orderId);
 
-    public Order updateStatusOrder(Integer orderId);
+    public Order updateStatusOrderSuccess(Integer orderId);
+
+    public Order updateStatusOrderCancel(Integer orderId);
 }

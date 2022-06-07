@@ -35,11 +35,14 @@ public class KafkaService {
 
                 Integer orderId = Integer.parseInt(rec.key());
                 // Precisamos definir qual vai ser o key e o value
-                // vou fazer pensando que vamos receber o order_id como key e o email do usuario como value
+                // vou fazer pensando que vamos receber o order_id como key e o email do usuario
+                // como value
                 if (rec.value() != null) {
                     String msgId = ServiceSES.sendMessage("Pedido " + rec.key() + " realizado.", rec.value());
                     if (msgId != null) {
-                        orderService.updateStatusOrder(orderId);
+                        orderService.updateStatusOrderSuccess(orderId);
+                    } else {
+                        orderService.updateStatusOrderCancel(orderId);
                     }
                 }
                 System.out.println("Mensagem processada.");

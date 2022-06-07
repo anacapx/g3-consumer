@@ -11,9 +11,9 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class KafkaService {
 
     @Autowired
@@ -33,15 +33,15 @@ public class KafkaService {
                 System.out.println("key: " + rec.key());
                 System.out.println("value: " + rec.value());
 
-                // Integer orderId = Integer.parseInt(rec.key());
+                Integer orderId = Integer.parseInt(rec.key());
                 // Precisamos definir qual vai ser o key e o value
-                // vou fazer pensando que vamos receber o order_id como key e o email como value
+                // vou fazer pensando que vamos receber o order_id como key e o email do usuario como value
                 if (rec.value() != null) {
-                    String msgId = ServiceSES.sendMessage("testando", rec.value());
+                    String msgId = ServiceSES.sendMessage("Pedido " + rec.key() + " realizado.", rec.value());
+                    if (msgId != null) {
+                        orderService.updateStatusOrder(orderId);
+                    }
                 }
-                // if (msgId != null) {
-                // orderService.updateStatusOrder(orderId);
-                // }
                 System.out.println("Mensagem processada.");
                 System.out.println("------------------------------------------");
 

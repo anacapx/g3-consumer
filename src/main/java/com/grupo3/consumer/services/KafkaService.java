@@ -13,11 +13,18 @@ import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.Gson;
+import com.grupo3.consumer.model.dto.MessageKafka;
+
 @Service
 public class KafkaService {
 
     @Autowired
     private IOrderService orderService;
+
+    public static MessageKafka convertStringJson(String jsonString) {
+        return new Gson().fromJson(jsonString, new MessageKafka().getClass());
+    }
 
     public void readMessage(String groupId) throws InterruptedException, ExecutionException {
         var consumer = new KafkaConsumer<String, String>(properties(groupId));
@@ -33,16 +40,26 @@ public class KafkaService {
                 System.out.println("key: " + rec.key());
                 System.out.println("value: " + rec.value());
 
-                Integer orderId = Integer.parseInt(rec.key());
-                // Precisamos definir qual vai ser o key e o value
-                // vou fazer pensando que vamos receber o order_id como key e o email do usuario
-                // como value
-                if (rec.value() != null) {
-                    String msgId = ServiceSES.sendMessage("Pedido " + rec.key() + " realizado.", rec.value());
-                    if (msgId != null) {
-                        orderService.updateStatusOrderSuccess(orderId);
-                    } else {
-                        orderService.updateStatusOrderCancel(orderId);
+                if (rec.key() != null) {
+                    try {
+
+                        Integer orderId = Integer.parseInt(rec.key());
+
+                        MessageKafka message = convertStringJson(rec.value());
+
+                        String msgId = ServiceSES.sendMessage(message.getUserName(), "Pedido " + rec.key() + " realizado.",
+                                message.getUserEmail());
+
+                        if (msgId != null) {
+                            orderService.updateStatusOrderSuccess(orderId);
+                        } else {
+                            System.err.println("Não foi possível concluir o pedido - "+ rec.key());
+                        }
+                    } catch(NumberFormatException ex){
+                        System.err.println("Order Id inválido.");
+                    }
+                    catch (Exception e) {
+                        System.err.println(e.getMessage());
                     }
                 }
                 System.out.println("Mensagem processada.");

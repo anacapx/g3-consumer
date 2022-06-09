@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import com.grupo3.consumer.dao.OrderDAO;
 import com.grupo3.consumer.model.Order;
-import com.grupo3.consumer.util.StatusOrder;
+import com.grupo3.consumer.model.enums.OrderEnum;
 
 @Component
 public class OrderServiceImpl implements IOrderService {
@@ -21,7 +21,7 @@ public class OrderServiceImpl implements IOrderService {
 	@Override
 	public boolean orderInProgress(Integer orderId) {
 		Order order = dao.findById(orderId).orElse(null);
-		if (order.getStatus() == StatusOrder.CONCLUIDO) {
+		if (order.getStatus() != OrderEnum.PENDING) {
 			return false;
 		}
 		return true;
@@ -35,20 +35,7 @@ public class OrderServiceImpl implements IOrderService {
 			throw new RuntimeException("Pedido indisponivel.");
 		}
 
-		order.setStatus(StatusOrder.CONCLUIDO);
-
-		return dao.save(order);
-	}
-
-	@Override
-	public Order updateStatusOrderCancel(Integer orderId) {
-		Order order = dao.findById(orderId).orElse(null);
-
-		if (!this.orderExists(orderId) || !this.orderInProgress(orderId)) {
-			throw new RuntimeException("Pedido indisponivel.");
-		}
-
-		order.setStatus(StatusOrder.CANCELADO);
+		order.setStatus(OrderEnum.COMPLETED);
 
 		return dao.save(order);
 	}

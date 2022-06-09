@@ -1,6 +1,6 @@
 package com.grupo3.consumer.model;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.grupo3.consumer.util.StatusOrder;
+import com.grupo3.consumer.model.enums.OrderEnum;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,22 +29,22 @@ import lombok.ToString;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_id")
-    private Integer id;
+    @Column(name = "orderId", nullable = false)
+    private Long orderId;
 
-    @Column(name = "user_id")
-    private Integer userId;
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
 
-    @Column(name = "order_total")
-    private Double total;
+    @Column(name = "order_total", nullable = false)
+    private Double value;
 
-    @Column(name = "order_products")
+    @Column(name = "order_products", nullable = false)
     private String products;
 
-    @Column(name = "order_date")
-    private Date date;
+    @Column(name = "order_date", nullable = false)
+    private Timestamp date = new Timestamp(System.currentTimeMillis());
 
-    @Column(name = "order_status")
+    @Column(name = "order_status", nullable = false)
     @Enumerated(EnumType.STRING)
-    private StatusOrder status;
+    private OrderEnum status;
 }

@@ -19,9 +19,17 @@ import lombok.ToString;
 @ToString
 public class MessageKafka {
   private Long orderId;
-  @Email(message="O campo EMAIL deve ser preenchido corretamente.")
+  @Email(message = "O campo EMAIL deve ser preenchido corretamente.")
   private String userEmail;
   private String userName;
   private OrderEnum status;
   private Timestamp date = new Timestamp(System.currentTimeMillis());
+
+  public MessageKafka(OrderDTO order) {
+    this.orderId = order.getId();
+    this.userEmail = order.getUser().getEmail();
+    this.userName = order.getUser().getName();
+    this.status = order.getStatus();
+    this.date = order.getDate();
+  }
 }

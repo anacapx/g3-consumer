@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
+import com.grupo3.consumer.services.ConsumerRecordsHandler;
 import com.grupo3.consumer.services.KafkaService;
 
 @SpringBootApplication
@@ -14,7 +15,8 @@ public class ConsumerApplication {
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
 
 		ConfigurableApplicationContext context = SpringApplication.run(ConsumerApplication.class, args);
-		KafkaService kafkaService = context.getBean(KafkaService.class);
+		ConsumerRecordsHandler consumerHandler = context.getBean(ConsumerRecordsHandler.class);
+		KafkaService kafkaService = context.getBean(KafkaService.class, consumerHandler);
 		kafkaService.readMessage("grupo3iLab");
 	}
 

@@ -47,4 +47,11 @@ public class Order {
     @Column(name = "order_status", nullable = false)
     @Enumerated(EnumType.STRING)
     private OrderEnum status;
+
+    public Order(Long userId, Double value, String products) {
+        this.userId = userId;
+        this.value = value;
+        this.products = products;
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.grupo3.consumer.services;
+package com.grupo3.consumer.services.interfaces;
 
 import com.grupo3.consumer.model.Order;
 

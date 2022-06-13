@@ -1,4 +1,4 @@
-package com.grupo3.consumer.services;
+package com.grupo3.consumer.services.classes;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.google.gson.Gson;
 import com.grupo3.consumer.model.dto.MessageKafka;
 import com.grupo3.consumer.model.dto.OrderDTO;
+import com.grupo3.consumer.services.interfaces.IOrderService;
 
 @Service
 public class ConsumerRecordsHandler {

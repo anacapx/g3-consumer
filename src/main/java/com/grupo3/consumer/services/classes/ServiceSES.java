@@ -1,4 +1,4 @@
-package com.grupo3.consumer.services;
+package com.grupo3.consumer.services.classes;
 
 import javax.mail.MessagingException;
 

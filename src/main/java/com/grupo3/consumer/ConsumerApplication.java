@@ -6,8 +6,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import com.grupo3.consumer.services.ConsumerRecordsHandler;
-import com.grupo3.consumer.services.KafkaService;
+import com.grupo3.consumer.services.classes.ConsumerRecordsHandler;
+import com.grupo3.consumer.services.classes.KafkaService;
 
 @SpringBootApplication
 public class ConsumerApplication {

@@ -1,4 +1,4 @@
-package com.grupo3.consumer.services;
+package com.grupo3.consumer.services.classes;
 
 import java.time.Duration;
 import java.util.Collections;
@@ -24,7 +24,7 @@ public class KafkaService {
 
     public void readMessage(String groupId) throws InterruptedException, ExecutionException {
         var consumer = new KafkaConsumer<String, String>(properties(groupId));
-        consumer.subscribe(Collections.singletonList("TOPIC_TEST"));
+        consumer.subscribe(Collections.singletonList(System.getenv("KAFKA_TOPIC")));
 
         while (keepConsuming) {
             try {
@@ -40,7 +40,7 @@ public class KafkaService {
 
     private static Properties properties(String groupId) {
         var properties = new Properties();
-        properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, System.getenv("KAFKA_HOST"));
         properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, groupId);

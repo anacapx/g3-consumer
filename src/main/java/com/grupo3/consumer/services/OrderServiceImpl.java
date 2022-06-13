@@ -14,12 +14,12 @@ public class OrderServiceImpl implements IOrderService {
 	private OrderDAO dao;
 
 	@Override
-	public boolean orderExists(Integer orderId) {
+	public boolean orderExists(Long orderId) {
 		return dao.findById(orderId).isPresent();
 	}
 
 	@Override
-	public boolean orderInProgress(Integer orderId) {
+	public boolean orderInProgress(Long orderId) {
 		Order order = dao.findById(orderId).orElse(null);
 		if (order.getStatus() != OrderEnum.PENDING) {
 			return false;
@@ -28,14 +28,14 @@ public class OrderServiceImpl implements IOrderService {
 	}
 
 	@Override
-	public Order updateStatusOrderSuccess(Integer orderId) {
+	public Order updateStatusOrderSuccess(Long orderId) {
 		Order order = dao.findById(orderId).orElse(null);
 
 		if (!this.orderExists(orderId) || !this.orderInProgress(orderId)) {
 			throw new RuntimeException("Pedido indisponivel.");
 		}
 
-		order.setStatus(OrderEnum.COMPLETED);
+		order.setStatus(OrderEnum.CREATED);
 
 		return dao.save(order);
 	}

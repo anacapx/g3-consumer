@@ -35,7 +35,7 @@ public class ConsumerRecordsHandler {
       if (rec.key() != null) {
         try {
 
-          Integer orderId = Integer.parseInt(rec.key());
+          Long orderId = Long.parseLong(rec.key());
 
           MessageKafka message = convertStringJson(rec.value());
 

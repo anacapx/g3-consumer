@@ -1,4 +1,4 @@
-package com.grupo3.consumer.services;
+package com.grupo3.consumer.services.classes;
 
 import javax.mail.MessagingException;
 
@@ -16,7 +16,7 @@ import software.amazon.awssdk.services.ses.model.SesException;
 
 public class ServiceSES {
 
-	public static String sendMessage(String message, String recipient) {
+	public static String sendMessage(String userName, String message, String recipient) {
 		SesClient client = SesClient.builder()
 				.region(Region.US_EAST_1)
 				.credentialsProvider(CredentialsAws.getCredentials())
@@ -24,7 +24,7 @@ public class ServiceSES {
 
 		String htmlBody = "<html>" +
 				"<body>" +
-				"<h1>Olá, este é um email teste!</h1>" +
+				"<h1>Olá " + userName + "!</h1>" +
 				"<p>Seu pedido foi realizado com sucesso</p>" +
 				"<p>" + message + "</p>" +
 				"</body>" +

@@ -1,0 +1,1 @@
+docker build -t $URL_IMG_CONSUMER_DOCKER -f Dockerfile .

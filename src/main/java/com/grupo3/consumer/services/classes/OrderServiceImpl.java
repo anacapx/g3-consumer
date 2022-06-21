@@ -16,7 +16,11 @@ public class OrderServiceImpl implements IOrderService {
 
 	@Override
 	public boolean orderExists(Long orderId) {
-		return repository.findById(orderId).isPresent();
+		Order order = repository.findById(orderId).orElse(null);
+		if (order == null) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override

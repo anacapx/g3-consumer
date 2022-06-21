@@ -3,9 +3,11 @@ image: debrum/ubuntu-jdk-mvn
 stages:
   - test
   - build
-  - build-docker
-  - push-docker
+  - docker
   - deploy
+
+variables:
+  DOCKER_HOST: tcp://docker:2375
 
 unit-test-job:
   stage: test
@@ -24,27 +26,17 @@ build-docker-job:
   before_script:
     - docker login -u ${CI_DOCKER_USER} -p ${CI_DOCKER_PASSWORD}
 
-  stage: build-docker
+  stage: docker
   script:
-    - docker build -t ${URL_IMG_CONSUMER_DOCKER} -f Dockerfile .
-    - docker push ${URL_IMG_CONSUMER_DOCKER}
-
-config-k8s-job:
-  stage: deploy-stage
-  script:
-    - echo "Deploying application..."
-    - echo "  KAFKA_HOST: ${kafka_host}" >> K8s/services/configmap.yml
-    # - echo "  KAFKA_TOPIC: $kafka_topic" >> K8s/services/configmap.yml
-    # - cat <<'EOF' >> K8s/services/configmap.yml
-    #   "  KAFKA_HOST: $kafka_host"
+    - docker build -t ${URL_IMG_DOCKER_CONSUMER} -f Dockerfile .
+    - docker push ${URL_IMG_DOCKER_CONSUMER}
 
 deploy-k8s-job:
-  stage: deploy-stage
-  image: didox/ubuntu-ansible
+  stage: deploy
+  image: debrum/ubuntu-ansible
   script:
     - echo "Deploying application..."
-    - cat <<EOF > key.pem
-      ${PRIVATE_KEY}
-      EOF
-    - chmod 400 key.pem
-    - ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i hosts prov.yml -u ubuntu --private-key key.pem
+    - echo "${HOST_DEV_K8S}" >> hosts
+    - cat hosts
+    - chmod 400 $PRIVATE_KEY
+    - ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i hosts ansibleDeploy.yml -u ubuntu --private-key $PRIVATE_KEY

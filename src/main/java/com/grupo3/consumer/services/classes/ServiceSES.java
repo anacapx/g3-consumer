@@ -30,7 +30,7 @@ public class ServiceSES {
 				"</body>" +
 				"</html>";
 		try {
-			SendEmailResponse response = send(client, "sender@email.com", recipient,
+			SendEmailResponse response = send(client, System.getenv("EMAIL_SENDER"), recipient,
 					"Pedido - Grupo 3", htmlBody);
 			client.close();
 			return response.messageId();

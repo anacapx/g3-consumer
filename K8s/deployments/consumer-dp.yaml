@@ -14,7 +14,38 @@ spec:
     spec:
       containers:
         - name: g3-consumer
-          image: $URL_IMG_CONSUMER_DOCKER
+          image: carolamaral/consumer-ilab-g3:latest
+          env:
+            - name: KAFKA_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: g3-configmap-consumer
+                  key: KAFKA_HOST
+            - name: KAFKA_TOPIC
+              valueFrom:
+                configMapKeyRef:
+                  name: g3-configmap-consumer
+                  key: KAFKA_TOPIC
+            - name: EMAIL_SENDER
+              valueFrom:
+                configMapKeyRef:
+                  name: g3-configmap-consumer
+                  key: EMAIL_SENDER
+            - name: DB_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: g3-configmap-consumer
+                  key: DB_USERNAME
+            - name: DB_URL_ORDER
+              valueFrom:
+                configMapKeyRef:
+                  name: g3-configmap-consumer
+                  key: DB_URL_ORDER
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysecret-g3
+                  key: DB_PASSWORD
           resources:
             limits:
               memory: "128Mi"

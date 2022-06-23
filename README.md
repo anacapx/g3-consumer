@@ -13,6 +13,8 @@ Consiste em um sistema que permite ao administrador, devidamente autenticado e a
 
 - Para ver o repositório da **API Order**, clique [aqui](https://github.com/anacapx/g3-order)
 
+- Para ver o repositório de **front-end**, clique [aqui](https://github.com/anacapx/g3-front)
+
 - Para acessar a aplicação diretamente no seu browser, acesse: http://g3kimchi.tk
 
 ### 👩🏽‍💻 Pessoas Desenvolvedoras

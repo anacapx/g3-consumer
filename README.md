@@ -7,7 +7,9 @@ Kimchi - G3
 - <p style="color: red;">Projeto destinado a criação de pedidos por um administrador com mensageria e deploy em kubernetes</p>
 
 Para ver o repositório da **API Auth**, clique aqui: [API Auth](https://github.com/anacapx/g3-auth)
+
 Para ver o repositório da **API User**, clique aqui: [API User](https://github.com/anacapx/g3-user)
+
 Para ver o repositório da **API Order**, clique aqui: [API Order](https://github.com/anacapx/g3-order)
 
 Para acessar a aplicação diretamente no seu browser ou smartphone, acesse https://http://g3kimchi.tk//
@@ -22,7 +24,7 @@ Para acessar a aplicação diretamente no seu browser ou smartphone, acesse http
 
 ## 💡 Mentor
 
-- Rafael Oliveira (https://www.linkedin.com/in/rafaelsomartins/)
+- [Rafael Oliveira](https://www.linkedin.com/in/rafaelsomartins/)
 
 ## 🚀 Tecnologias
 

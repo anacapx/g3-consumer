@@ -1,0 +1,1 @@
+mvn exec:java -Dexec.mainClass="com.grupo3.consumer.ConsumerApplication"

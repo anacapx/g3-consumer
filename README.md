@@ -33,18 +33,19 @@ Consiste em um sistema que permite ao administrador, devidamente autenticado e a
 
 Tecnologias que utilizamos para desenvolver esta API Rest:
 
-- Java
-- SpringBoot
-- PostgreSQL
-- Swagger
-- Kafka
-- Gitlab
-- JUnit
-- Mockito
-- Kubernetes
-- Docker
-- AWS
-- New Relic
+- [Java](https://www.java.com/pt-BR/) 
+- [Spring Boot](https://spring.io/projects/spring-boot)
+- [Swagger](https://swagger.io/)
+- [Apache HttpClient](https://hc.apache.org/httpcomponents-client-5.1.x/)
+- [PostgreSQL](https://www.postgresql.org/) 
+- [Kafka](https://kafka.apache.org/) 
+- [JUnit](https://junit.org/junit5/) 
+- [Mockito](https://site.mockito.org/) 
+- [New Relic](https://newrelic.com/) 
+- [Docker](https://www.docker.com/)
+- [Kubernetes](https://kubernetes.io/pt-br/docs/concepts/overview/what-is-kubernetes/)
+- [GitLab](https://gitlab.com/)
+- [AWS](https://aws.amazon.com/)
 
 ## 🏁 Iniciando o projeto
 

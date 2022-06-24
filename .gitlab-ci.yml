@@ -36,7 +36,7 @@ deploy-k8s-job:
   image: debrum/ubuntu-ansible
   script:
     - echo "Deploying application..."
-    - echo "${HOST_DEV_K8S}" >> hosts
+    - echo "${HOST_DEV_K8S}" > hosts
     - cat hosts
     - chmod 400 $PRIVATE_KEY
-    - ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i hosts ansibleDeploy.yml -u ubuntu --private-key $PRIVATE_KEY
+    - ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i hosts ansibleDeploy.yaml -u ubuntu --private-key $PRIVATE_KEY

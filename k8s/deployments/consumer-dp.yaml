@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: g3-consumer
+  namespace: namespace-g3
+spec:
+  selector:
+    matchLabels:
+      app: g3-consumer
+  template:
+    metadata:
+      labels:
+        app: g3-consumer
+    spec:
+      containers:
+        - name: g3-consumer
+          image: carolamaral/consumer-ilab-g3:latest
+          env:
+            - name: KAFKA_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: g3-configmap-consumer
+                  key: KAFKA_HOST
+            - name: KAFKA_TOPIC
+              valueFrom:
+                configMapKeyRef:
+                  name: g3-configmap-consumer
+                  key: KAFKA_TOPIC
+            - name: EMAIL_SENDER
+              valueFrom:
+                configMapKeyRef:
+                  name: g3-configmap-consumer
+                  key: EMAIL_SENDER
+            - name: DB_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: g3-configmap-consumer
+                  key: DB_USERNAME
+            - name: DB_URL_ORDER
+              valueFrom:
+                configMapKeyRef:
+                  name: g3-configmap-consumer
+                  key: DB_URL_ORDER
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysecret-g3
+                  key: DB_PASSWORD
+            - name: AWS_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: mysecret-g3
+                  key: AWS_ACCESS_KEY
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: mysecret-g3
+                  key: AWS_SECRET_ACCESS_KEY
+          resources:
+            limits:
+              memory: "4Gi"
+              cpu: "1"
+          ports:
+            - containerPort: 8083

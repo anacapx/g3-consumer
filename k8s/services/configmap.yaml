@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: g3-configmap-consumer
+  namespace: namespace-g3
+data:
+  DB_USERNAME: ${DB_USERNAME}
+  DB_URL_ORDER: ${DB_URL_ORDER}
+  KAFKA_HOST: ${KAFKA_HOST}
+  KAFKA_TOPIC: ${KAFKA_TOPIC}
+  EMAIL_SENDER: ${EMAIL_SENDER}
